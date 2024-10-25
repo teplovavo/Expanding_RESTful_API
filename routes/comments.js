@@ -1,17 +1,13 @@
-const comments = [];
-
-module.exports = comments;
-
-
-
-
 const express = require("express");
 const router = express.Router();
-const comments = require("../data/comments");
+const comments = require("../data/comments"); // import comments from data/comments.js
 const error = require("../utilities/error");
 
 // POST /comments - Create a new comment
 router.post('/', (req, res, next) => {
+
+    console.log("Request Body:", req.body); //test log
+
   const { userId, postId, body } = req.body;
   if (userId && postId && body) {
     const newComment = {
