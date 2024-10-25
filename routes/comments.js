@@ -68,3 +68,24 @@ router.delete('/:id', (req, res, next) => {
 });
 
 module.exports = router;
+
+
+
+
+router.post('/', (req, res, next) => {
+    console.log("Received Data:", req.body); //test log
+    const { userId, postId, body } = req.body;
+    if (userId && postId && body) {
+      const newComment = {
+        id: comments.length + 1,
+        userId,
+        postId,
+        body
+      };
+      comments.push(newComment);
+      res.json(newComment);
+    } else {
+      next(error(400, "Insufficient Data"));
+    }
+  });
+  
