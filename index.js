@@ -9,6 +9,17 @@ const error = require("./utilities/error");
 const app = express();
 const port = 3000;
 
+const comments = require('./routes/comments');
+app.use('/api/comments', comments);
+
+
+
+
+
+
+
+
+
 // Parsing Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));

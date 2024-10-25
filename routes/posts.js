@@ -78,3 +78,29 @@ router
   });
 
 module.exports = router;
+
+////////////////////////////////////////////////part 2///////////////////////////////////////////////////
+
+
+// GET /api/users/:id/posts - Retrieve all posts by a user with the specified id
+router.get('/users/:id/posts', (req, res, next) => {
+  const userId = parseInt(req.params.id);
+  const userPosts = posts.filter(post => post.userId === userId);
+
+  if (userPosts.length > 0) {
+    res.json(userPosts);
+  } else {
+    next(error(404, 'No posts found for this user'));
+  }
+});
+
+
+router.get('/', (req, res) => {
+  const userId = parseInt(req.query.userId); // Get userId from query parameter
+  if (userId) {
+    const userPosts = posts.filter(post => post.userId === userId); // Filter posts by userId
+    res.json(userPosts); // Return only the posts belonging to this user
+  } else {
+    res.json(posts); // Return all posts if userId is not provided
+  }
+});
